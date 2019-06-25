@@ -4,9 +4,9 @@ import (
 	"context"
 )
 
-// Conster returns a Runner that duplicates pre-defined data according to input size.
+// NewConstRunner returns a Runner that duplicates pre-defined data according to input size.
 // d is expected to be single row data
-func Conster(d Data) Runner {
+func NewConstRunner(d Data) Runner {
 	if d.Len() != 1 {
 		panic("invalid usage of const planner. please pass single-row data")
 	}
@@ -35,4 +35,7 @@ func (r *constt) run(data Dataset) (Dataset, error) {
 }
 func (r *constt) BatchFunction() BatchFunction {
 	return r.run
+}
+func (r *constt) Scopes() StringsSet {
+	return nil
 }
