@@ -30,7 +30,7 @@ func TestConster(t *testing.T) {
 		require.Equal(t, inp.Len(), res.Len())
 	})
 
-	t.Run("multiple batches batch", func(t *testing.T) {
+	t.Run("multiple batches", func(t *testing.T) {
 		r := ep.Conster(strs{"a"})
 		inp1 := ep.NewDataset(integers{1, 2, 3, 4, 5, 6})
 		inp2 := ep.NewDataset(integers{7, 8})
