@@ -4,11 +4,11 @@ import (
 	"context"
 )
 
-// NewConstRunner returns a Runner that duplicates pre-defined data according to input size.
-// d is expected to be single row data
+// NewConstRunner returns a Runner that duplicates pre-defined data according
+// to input size. d is expected to be single row data
 func NewConstRunner(d Data) Runner {
 	if d.Len() != 1 {
-		panic("invalid usage of const planner. please pass single-row data")
+		panic("invalid const runner creation. please pass single-row data")
 	}
 	return &constt{d}
 }
