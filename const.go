@@ -2,7 +2,10 @@ package ep
 
 import (
 	"context"
+	"github.com/panoplyio/ep/compare"
 )
+
+var _ = registerGob(&constt{})
 
 // NewConstRunner returns a Runner that duplicates pre-defined data according
 // to input size. d is expected to be single row data
@@ -18,8 +21,12 @@ type constt struct {
 }
 
 func (r *constt) Equals(other interface{}) bool {
-	o, ok := other.(constt)
-	return ok && r.Data.Equal(o.Data)
+	o, ok := other.(*constt)
+	if !ok {
+		return false
+	}
+	c, err := r.Data.Compare(o.Data)
+	return err == nil && c[0] == compare.Equal
 }
 func (r *constt) Returns() []Type { return []Type{r.Data.Type()} }
 func (r *constt) Run(_ context.Context, inp, out chan Dataset) error {

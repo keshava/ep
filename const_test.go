@@ -43,3 +43,13 @@ func TestNewConstRunner(t *testing.T) {
 		require.Equal(t, []string{"(a)", "(a)", "(a)", "(a)", "(a)", "(a)", "(a)", "(a)"}, res.Strings())
 	})
 }
+
+func TestNewConstRunner_Equals(t *testing.T) {
+	r1 := ep.NewConstRunner(strs{"a"})
+	r2 := ep.NewConstRunner(strs{"a"})
+	r3 := ep.NewConstRunner(strs{"b"})
+
+	require.True(t, r1.Equals(r1))
+	require.True(t, r1.Equals(r2))
+	require.False(t, r1.Equals(r3))
+}
